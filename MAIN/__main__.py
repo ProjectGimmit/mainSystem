@@ -1,13 +1,11 @@
 # main.py
 
-import time
 import datetime
 import sys
-import json
 import schedule
 import os
 
-from common.edit_json import read_json, write_json
+from modules.edit_json import read_json, write_json
 
 file_path = os.path.abspath('./config.json')
 

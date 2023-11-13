@@ -1,7 +1,7 @@
 import json
 from flask import Flask
 import os
-from common.edit_json import read_json, write_json
+from modules.edit_json import read_json, write_json
 
 app = Flask(__name__)
 

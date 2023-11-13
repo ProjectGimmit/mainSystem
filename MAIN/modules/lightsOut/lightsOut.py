@@ -1,6 +1,6 @@
 import smbus
 import time
-from common.mcp23017 import MCP23017
+from MAIN.modules.mcp23017 import MCP23017
 
 
 """
