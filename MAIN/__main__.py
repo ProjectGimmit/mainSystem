@@ -7,10 +7,12 @@ import os
 
 from modules.edit_json import read_json, write_json
 
-file_path = os.path.abspath('./config.json')
+dir_path = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.split(dir_path)[0] + "/config.json"
 
 def hello():
 	print("hello : ", datetime.datetime.now())
+
 	json_content = read_json(file_path)
 	print("json : ", json_content["test"]["content"])
 

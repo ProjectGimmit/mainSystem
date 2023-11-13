@@ -5,7 +5,8 @@ from modules.edit_json import read_json, write_json
 
 app = Flask(__name__)
 
-file_path = os.path.abspath('./config.json') # moduleからのパス
+dir_path = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.split(dir_path)[0] + "/config.json"
 
 @app.route("/config")
 def hello_world() :
