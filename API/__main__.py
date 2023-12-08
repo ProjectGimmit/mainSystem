@@ -1,7 +1,7 @@
 import json
 from flask import Flask, request
 import os
-from modules.edit_json import read_json, write_json
+from modules.edit_json import read_config, write_config
 
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ file_path = os.path.split(dir_path)[0] + "/config.json"
 
 @app.route("/config")
 def hello_world() :
-	json_dist = read_json(json_path=file_path)
+	json_dist = read_config()
 	print(json_dist)
 	return "<p>Hello, World!</p>"
 
@@ -20,21 +20,18 @@ def hello_world() :
 @app.route("/mon", methods=["GET"])
 def read_mon() :
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
+	json_dist = read_config()
 	return json_dist["mon"]
 
 @app.route("/mon", methods=["POST"])
 def update_mon() :
 	# リクエストボディの取得
 	data = request.get_json()
-
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
-
+	json_dist = read_config()
 	json_dist["mon"] = data
 	json_dist["update"] = True
-	write_json(file_path, json_dist)		# ファイルへの書き込み
-
+	write_config(json_dist)
 	return "UPDATE MONDAY"
 
 
@@ -44,22 +41,20 @@ def update_mon() :
 @app.route("/tue")
 def read_tue() :
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
+	json_dist = read_config()
 	return json_dist["tue"]
 
 @app.route("/tue", methods=["POST"])
 def update_tue() :
 	# リクエストボディの取得
 	data = request.get_json()
-
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
-
+	json_dist = read_config()
 	json_dist["tue"] = data
 	json_dist["update"] = True
-	write_json(file_path, json_dist)		# ファイルへの書き込み
-
+	write_config(json_dist)
 	return "<p>UPDATE TUESDAY</p>"
+
 
 #---------
 # 水曜日
@@ -67,22 +62,20 @@ def update_tue() :
 @app.route("/wed")
 def read_wed() :
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
+	json_dist = read_config()
 	return json_dist["wed"]
 
 @app.route("/wed", methods=["POST"])
 def update_wed() :
 	# リクエストボディの取得
 	data = request.get_json()
-
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
-
+	json_dist = read_config()
 	json_dist["wed"] = data
 	json_dist["update"] = True
-	write_json(file_path, json_dist)		# ファイルへの書き込み
-
+	write_config(json_dist)
 	return "<p>UPDATE WEDNESDAY</p>"
+
 
 #---------
 # 木曜日
@@ -90,22 +83,20 @@ def update_wed() :
 @app.route("/thu")
 def read_thu() :
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
+	json_dist = read_config()
 	return json_dist["thu"]
 
 @app.route("/thu", methods=["POST"])
 def update_thu() :
 	# リクエストボディの取得
 	data = request.get_json()
-
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
-
+	json_dist = read_config()
 	json_dist["thu"] = data
 	json_dist["update"] = True
-	write_json(file_path, json_dist)		# ファイルへの書き込み
-
+	write_config(json_dist)
 	return "<p>UPDATE THURSDAY</p>"
+
 
 #---------
 # 金曜日
@@ -113,22 +104,20 @@ def update_thu() :
 @app.route("/fri")
 def read_fri() :
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
+	json_dist = read_config()
 	return json_dist["fri"]
 
 @app.route("/fri", methods=["POST"])
 def update_fri() :
 	# リクエストボディの取得
 	data = request.get_json()
-
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
-
+	json_dist = read_config()
 	json_dist["fri"] = data
 	json_dist["update"] = True
-	write_json(file_path, json_dist)		# ファイルへの書き込み
-
+	write_config(json_dist)
 	return "<p>UPDATE FRIDAY</p>"
+
 
 #---------
 # 土曜日
@@ -136,22 +125,20 @@ def update_fri() :
 @app.route("/sat")
 def read_sat() :
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
+	json_dist = read_config()
 	return json_dist["sat"]
 
 @app.route("/sat", methods=["POST"])
 def update_sat() :
 	# リクエストボディの取得
 	data = request.get_json()
-
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
-
+	json_dist = read_config()
 	json_dist["sat"] = data
 	json_dist["update"] = True
-	write_json(file_path, json_dist)		# ファイルへの書き込み
-
+	write_config(json_dist)
 	return "<p>UPDATE SATADAY</p>"
+
 
 #---------
 # 日曜日
@@ -159,21 +146,18 @@ def update_sat() :
 @app.route("/sun")
 def read_sun() :
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
+	json_dist = read_config()
 	return json_dist["sun"]
 
 @app.route("/sun", methods=["POST"])
 def update_sun() :
 	# リクエストボディの取得
 	data = request.get_json()
-
 	# config.jsonの読み込み
-	json_dist = read_json(json_path=file_path)
-
+	json_dist = read_config()
 	json_dist["sun"] = data
 	json_dist["update"] = True
-	write_json(file_path, json_dist)		# ファイルへの書き込み
-
+	write_config(json_dist)
 	return "<p>UPDATE WEDNESDAY</p>"
 
 

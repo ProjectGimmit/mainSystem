@@ -4,8 +4,8 @@ import datetime
 import sys
 import schedule
 import os
+from modules.edit_json import read_config, write_config
 
-from modules.edit_json import read_json, write_json
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.split(dir_path)[0] + "/config.json"
@@ -13,16 +13,16 @@ file_path = os.path.split(dir_path)[0] + "/config.json"
 def hello():
 	print("hello : ", datetime.datetime.now())
 
-	json_content = read_json(file_path)
+	json_content = read_config()
 	print("json : ", json_content["test"]["content"])
 
 
 def check_config() :
 	print("check")
-	json_dist = read_json(file_path)
+	json_dist = read_config()
 	if json_dist["test"]["update"] :
 		json_dist["test"]["update"] = False
-		write_json(file_path, json_dist)		# ファイルへの書き込み
+		write_config()
 		scheduler1.clear("job")
 		scheduler1.every(2).seconds.do(hello).tag("job")
 	else :
