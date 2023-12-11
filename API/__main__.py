@@ -1,6 +1,7 @@
 import json
 from flask import Flask, request
 from modules.edit_json import read_config, write_config
+from flask_cors import cross_origin
 
 app = Flask(__name__)
 
@@ -9,6 +10,7 @@ app = Flask(__name__)
 # アラーム一覧
 #---------------
 @app.route("/alarm")
+@cross_origin(origins=["http://localhost:5173"], methods=["GET"])
 def get_alarms() :
 	json_dist = read_config()
 	alarm_list = {
@@ -47,12 +49,14 @@ def get_alarms() :
 # 月曜日
 #---------
 @app.route("/<weekday>", methods=["GET"])
+@cross_origin(origins=["http://localhost:5173"], methods=["GET"])
 def read_mon(weekday) :
 	# config.jsonの読み込み
 	json_dist = read_config()
 	return json_dist[weekday]
 
-@app.route("/<weekday>", methods=["POST"])
+@app.route("/config/<weekday>", methods=["POST"])
+@cross_origin(origins=["http://localhost:5173"], methods=["POST"])
 def update_mon(weekday) :
 	# リクエストボディの取得
 	data = request.get_json()
@@ -64,6 +68,7 @@ def update_mon(weekday) :
 	return "UPDATE MONDAY"
 
 @app.route("/alarm/<weekday>", methods=["POST"])
+@cross_origin(origins=["http://localhost:5173"], methods=["POST"])
 def update_mon_alarm(weekday) :
 	# リクエストボディの取得
 	data = request.get_json()
