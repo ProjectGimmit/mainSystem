@@ -10,7 +10,7 @@ app = Flask(__name__)
 # アラーム一覧
 #---------------
 @app.route("/alarm")
-@cross_origin(origins=["http://localhost:5173"], methods=["GET"])
+@cross_origin(origins=["*"], methods=["GET"])
 def get_alarms() :
 	json_dist = read_config()
 	alarm_list = {
@@ -49,14 +49,14 @@ def get_alarms() :
 # 月曜日
 #---------
 @app.route("/<weekday>", methods=["GET"])
-@cross_origin(origins=["http://localhost:5173"], methods=["GET"])
+@cross_origin(origins=["*"], methods=["GET"])
 def read_mon(weekday) :
 	# config.jsonの読み込み
 	json_dist = read_config()
 	return json_dist[weekday]
 
 @app.route("/config/<weekday>", methods=["POST"])
-@cross_origin(origins=["http://localhost:5173"], methods=["POST"])
+@cross_origin(origins=["*"], methods=["POST"])
 def update_mon(weekday) :
 	# リクエストボディの取得
 	data = request.get_json()
@@ -68,7 +68,7 @@ def update_mon(weekday) :
 	return "UPDATE MONDAY"
 
 @app.route("/alarm/<weekday>", methods=["POST"])
-@cross_origin(origins=["http://localhost:5173"], methods=["POST"])
+@cross_origin(origins=["*"], methods=["POST"])
 def update_mon_alarm(weekday) :
 	# リクエストボディの取得
 	data = request.get_json()
@@ -79,6 +79,18 @@ def update_mon_alarm(weekday) :
 	json_dist["update"] = True
 	write_config(json_dist)
 	return "UPDATE MONDAY"
+
+#---------
+# お試し実行
+#---------
+@app.route("/trial/<weekday>", methods=["GET"])
+@cross_origin(origins=["*"], methods=["GET"])
+def alarm_trial(weekday) :
+	# アラームを取得
+	json_dist = read_config()
+	# weekdayのアラームを実行
+
+	return json_dist[weekday]
 
 
 
