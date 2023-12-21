@@ -1,13 +1,20 @@
 import datetime
 import random
 import time
+
+from wires import Wires
 from toggleSW import ToggleSW
 from keySW import KeySW
 from level import Level
 from lightsout import Lightsout
 from modules.edit_json import read_config, write_config
 
-LIMIT_TIME = 15 # ギミック解除タイムリミット(秒)
+LIMIT_TIME = 30 # ギミック解除タイムリミット(秒)
+
+# #-----------
+# # toggleSW
+# #-----------
+wires = Wires()
 
 # #-----------
 # # toggleSW
@@ -41,10 +48,39 @@ tm = tm1637.TM1637(clk=21, dio=20)
 #-----------------------
 def init_scheduler():
     main_scheduler.clear()
-    main_scheduler.every(3).seconds.do(check_config).tag("check_json")
-    main_scheduler.every(10).seconds.do(alarm_process, limit=LIMIT_TIME, weekday="mon")
+    main_scheduler.every(1).seconds.do(check_config).tag("check_json")
+    # main_scheduler.every(10).seconds.do(alarm_process, limit=LIMIT_TIME, weekday="mon")
     # config読み込み
+    config = read_config()
     # 曜日ごとのスケジュール設定
+    if config["mon"]["enable"] :
+         alarm_tmp = config["mon"]["alarm"]
+         alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
+         main_scheduler.every().monday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="mon")
+    if config["tue"]["enable"] :
+         alarm_tmp = config["tue"]["alarm"]
+         alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
+         main_scheduler.every().tuesday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="tue")
+    if config["wed"]["enable"] :
+         alarm_tmp = config["wed"]["alarm"]
+         alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
+         main_scheduler.every().wednesday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="wed")
+    if config["thu"]["enable"] :
+         alarm_tmp = config["thu"]["alarm"]
+         alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
+         main_scheduler.every().thursday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="thu")
+    if config["fri"]["enable"] :
+         alarm_tmp = config["fri"]["alarm"]
+         alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
+         main_scheduler.every().friday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="fri")
+    if config["sat"]["enable"] :
+         alarm_tmp = config["sat"]["alarm"]
+         alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
+         main_scheduler.every().saturday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="sat")
+    if config["sun"]["enable"] :
+         alarm_tmp = config["sun"]["alarm"]
+         alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
+         main_scheduler.every().sunday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="sun")
 
 #-------------------------
 # 設定ファイルの更新確認
@@ -56,14 +92,39 @@ def check_config():
         init_scheduler()
         config["update"] = False
         write_config(config)
-    else:
-        print("no update")
 
 
 
-from mcp23017 import MCP23017
-action_btn = MCP23017(0x27)
-action_btn.GPIO_A_init(0xFF)
+import RPi.GPIO as GPIO
+
+ALARM_BTN = 5
+FORCE_BTN = 6
+BUZZER = 13
+
+GPIO.setmode(GPIO.BCM) 
+GPIO.setup(ALARM_BTN,GPIO.IN)
+GPIO.setup(FORCE_BTN,GPIO.IN)
+GPIO.setup(BUZZER,GPIO.OUT,initial=GPIO.LOW)
+buzzer = GPIO.PWM(BUZZER,100)
+
+def alarm():
+    buzzer.ChangeFrequency(1000)
+    while True :
+      buzzer.start(95) 
+      time.sleep(0.1)
+      buzzer.stop()
+      time.sleep(0.1)
+
+      buzzer.start(95) 
+      time.sleep(0.1)
+      buzzer.stop()
+      time.sleep(0.1)
+
+      buzzer.start(95) 
+      time.sleep(0.1)
+      buzzer.stop()
+      time.sleep(1)
+     
 
 #---------------
 # アラーム解除
@@ -75,10 +136,12 @@ def alarm_process(limit: int, weekday: str):
         #-------------------
         # アラーム一時停止
         #-------------------
+        p = Process(target=alarm)
+        p.start()
         while True:
-            print("beep")
-            time.sleep(3)
-            break
+            if not GPIO.input(ALARM_BTN) : 
+                p.terminate()
+                break
 
         #------------------
         # ギミック解除プロセス開始
@@ -120,7 +183,7 @@ def alarm_process(limit: int, weekday: str):
             #-----------
             # 強制停止
             #-----------
-            if not action_btn.GPIO_A_input(port=0) :
+            if not GPIO.input(FORCE_BTN) :
               forced_stop = True
               break
 
@@ -169,6 +232,7 @@ def main_process(weekday) :
 	#-------------------
 	# ギミックリセット
 	#-------------------
+	wires.stop()
 	toggleSW.stop()
 	keySW.stop()
 	level.stop()
@@ -176,7 +240,7 @@ def main_process(weekday) :
 	
 	for value in enable_list :
 		if value == "wires":
-			print("wires")
+			wires.loop(WIRES_CONFIG)
 
 		if value == "toggleSW":
 			print("toggleSW")
@@ -194,11 +258,13 @@ def main_process(weekday) :
 			print("level")
 			level.loop(LEVEL_CONFIG)
 
-	time.sleep(1)
+	while True:
+		if not GPIO.input(ALARM_BTN) : break
 
 	#---------------
 	# ギミック停止
 	#---------------
+	wires.stop()
 	toggleSW.stop()
 	keySW.stop()
 	level.stop()
@@ -219,11 +285,12 @@ def clock() -> int:
 #---------------
 if __name__ == "__main__":
     try:
+      init_scheduler()
+      wires.stop()
       toggleSW.stop()
       keySW.stop()
       level.stop()
       lightsout.stop()
-      init_scheduler()
       view_h = 0
       view_m = 0
       while True:

@@ -1,54 +1,47 @@
-
 import time
 from multiprocessing import Process
+import RPi.GPIO as GPIO
 
-def process_target() :
-    print("in process")
-    time.sleep(0.5)
-    print("in process")
-    time.sleep(0.5)
-    print("in process")
-    time.sleep(0.5)
-    print("in process")
-    time.sleep(0.5)
-    print("in process")
-    time.sleep(0.5)
-    print("in process")
-    time.sleep(0.5)
+ALARM_BTN = 5
+FORCE_BTN = 6
 
-def hoge() :
-  while True:
-    while True:
-      print("beep")
-      time.sleep(3)
-      break
+BUZZER = 13
 
-    p = Process(target=process_target)
-    p.start()
-
-    while True:
-      print("時間表示ループ")
-      time.sleep(0.1)
-
-      # プロセス（ギミック）が終了したら
-      if not p.is_alive():
-        print("プロセス終了")
-        break
-       
-      # 時間超過
-      # if timer_over :
-      #
-    
-    if p.is_alive():
-      print("再ループ")
-      p.terminate()
-    else :
-      print("ループ終了")
-      break
-       
-       
+GPIO.setmode(GPIO.BCM) 
+GPIO.setup(BUZZER,GPIO.OUT,initial=GPIO.LOW)
+p = GPIO.PWM(BUZZER,100)
+GPIO.setup(ALARM_BTN,GPIO.IN)
+GPIO.setup(FORCE_BTN,GPIO.IN)
 
 if __name__ == "__main__":
+
   print("start")
-  hoge()
+  try :
+    p.ChangeFrequency(1000)
+    while True :
+    #   alarmBtn = GPIO.input(ALARM_BTN)
+    #   forceBtn = GPIO.input(FORCE_BTN)
+    #   if not alarmBtn :
+    #     print("alarm")
+    #   if not forceBtn :
+    #     print("force")
+      p.start(95) 
+      time.sleep(0.1)
+      p.stop()
+      time.sleep(0.1)
+
+      p.start(95) 
+      time.sleep(0.1)
+      p.stop()
+      time.sleep(0.1)
+
+      p.start(95) 
+      time.sleep(0.1)
+      p.stop()
+      time.sleep(1)
+
+
+
+  except  KeyboardInterrupt:
+    GPIO.cleanup()
   print("end")

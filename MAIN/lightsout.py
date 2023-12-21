@@ -1,8 +1,4 @@
-import sys
-import time
 import mcp23017
-
-
 
 class Lightsout():
     def __init__(self) -> None:
