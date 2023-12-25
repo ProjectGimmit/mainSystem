@@ -56,31 +56,31 @@ def init_scheduler():
     if config["mon"]["enable"] :
          alarm_tmp = config["mon"]["alarm"]
          alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
-         main_scheduler.every().monday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="mon")
+         main_scheduler.every().monday.at(alarm_str).do(alarm_process, weekday="mon")
     if config["tue"]["enable"] :
          alarm_tmp = config["tue"]["alarm"]
          alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
-         main_scheduler.every().tuesday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="tue")
+         main_scheduler.every().tuesday.at(alarm_str).do(alarm_process, weekday="tue")
     if config["wed"]["enable"] :
          alarm_tmp = config["wed"]["alarm"]
          alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
-         main_scheduler.every().wednesday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="wed")
+         main_scheduler.every().wednesday.at(alarm_str).do(alarm_process, weekday="wed")
     if config["thu"]["enable"] :
          alarm_tmp = config["thu"]["alarm"]
          alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
-         main_scheduler.every().thursday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="thu")
+         main_scheduler.every().thursday.at(alarm_str).do(alarm_process, weekday="thu")
     if config["fri"]["enable"] :
          alarm_tmp = config["fri"]["alarm"]
          alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
-         main_scheduler.every().friday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="fri")
+         main_scheduler.every().friday.at(alarm_str).do(alarm_process, weekday="fri")
     if config["sat"]["enable"] :
          alarm_tmp = config["sat"]["alarm"]
          alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
-         main_scheduler.every().saturday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="sat")
+         main_scheduler.every().saturday.at(alarm_str).do(alarm_process, weekday="sat")
     if config["sun"]["enable"] :
          alarm_tmp = config["sun"]["alarm"]
          alarm_str = alarm_tmp[:2] + ":" + alarm_tmp[2:]
-         main_scheduler.every().sunday.at(alarm_str).do(alarm_process, limit=LIMIT_TIME, weekday="sun")
+         main_scheduler.every().sunday.at(alarm_str).do(alarm_process, weekday="sun")
 
 #-------------------------
 # 設定ファイルの更新確認
@@ -92,6 +92,13 @@ def check_config():
         init_scheduler()
         config["update"] = False
         write_config(config)
+    
+    if config["trial"]["enable"]:
+        main_scheduler.clear()
+        config["trial"]["enable"] = False
+        write_config(config)
+        alarm_process(weekday=config["trial"]["weekday"])
+        init_scheduler()
 
 
 
@@ -129,7 +136,7 @@ def alarm():
 #---------------
 # アラーム解除
 #---------------
-def alarm_process(limit: int, weekday: str):
+def alarm_process(weekday: str):
     forced_stop = False # 強制停止フラグ
     while True:
         
@@ -163,7 +170,7 @@ def alarm_process(limit: int, weekday: str):
             # カウントダウン
             #-----------------
             now_time = time.monotonic()
-            tmp_time = limit - int(now_time - start_time)
+            tmp_time = LIMIT_TIME - int(now_time - start_time)
 
             if view_time != tmp_time:
               view_time = tmp_time
