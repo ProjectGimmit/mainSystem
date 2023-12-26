@@ -89,7 +89,9 @@ def alarm_trial(weekday) :
 	# アラームを取得
 	json_dist = read_config()
 	# weekdayのアラームを実行
-
+	json_dist["trial"]["enable"] = True
+	json_dist["trial"]["weekday"] = weekday
+	write_config(json_dist)
 	return json_dist[weekday]
 
 
