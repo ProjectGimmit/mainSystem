@@ -17,30 +17,86 @@ def get_alarms() :
 		"mon": {
 			"enable": json_dist["mon"]["enable"],
 			"alarm": json_dist["mon"]["alarm"],
+			"limit" : json_dist["mon"]["limit"],
+			"gimmickEnable": {
+				"wires": json_dist["mon"]["gimmick"]["wires"]["enable"],
+				"toggleSW": json_dist["mon"]["gimmick"]["toggleSW"]["enable"],
+				"keySW": json_dist["mon"]["gimmick"]["keySW"]["enable"],
+				"lightsOut": json_dist["mon"]["gimmick"]["lightsOut"]["enable"],
+				"level": json_dist["mon"]["gimmick"]["level"]["enable"],
+			}
 		},
 		"tue": {
 			"enable": json_dist["tue"]["enable"],
 			"alarm": json_dist["tue"]["alarm"],
+			"limit" : json_dist["mon"]["limit"],
+			"gimmickEnable": {
+				"wires": json_dist["tue"]["gimmick"]["wires"]["enable"],
+				"toggleSW": json_dist["tue"]["gimmick"]["toggleSW"]["enable"],
+				"keySW": json_dist["tue"]["gimmick"]["keySW"]["enable"],
+				"lightsOut": json_dist["tue"]["gimmick"]["lightsOut"]["enable"],
+				"level": json_dist["tue"]["gimmick"]["level"]["enable"],
+			}
 		},
 		"wed": {
 			"enable": json_dist["wed"]["enable"],
 			"alarm": json_dist["wed"]["alarm"],
+			"limit" : json_dist["mon"]["limit"],
+			"gimmickEnable": {
+				"wires": json_dist["wed"]["gimmick"]["wires"]["enable"],
+				"toggleSW": json_dist["wed"]["gimmick"]["toggleSW"]["enable"],
+				"keySW": json_dist["wed"]["gimmick"]["keySW"]["enable"],
+				"lightsOut": json_dist["wed"]["gimmick"]["lightsOut"]["enable"],
+				"level": json_dist["wed"]["gimmick"]["level"]["enable"],
+			}
 		},
 		"thu": {
 			"enable": json_dist["thu"]["enable"],
 			"alarm": json_dist["thu"]["alarm"],
+			"limit" : json_dist["mon"]["limit"],
+			"gimmickEnable": {
+				"wires": json_dist["thu"]["gimmick"]["wires"]["enable"],
+				"toggleSW": json_dist["thu"]["gimmick"]["toggleSW"]["enable"],
+				"keySW": json_dist["thu"]["gimmick"]["keySW"]["enable"],
+				"lightsOut": json_dist["thu"]["gimmick"]["lightsOut"]["enable"],
+				"level": json_dist["thu"]["gimmick"]["level"]["enable"],
+			}
 		},
 		"fri": {
 			"enable": json_dist["fri"]["enable"],
 			"alarm": json_dist["fri"]["alarm"],
+			"limit" : json_dist["mon"]["limit"],
+			"gimmickEnable": {
+				"wires": json_dist["fri"]["gimmick"]["wires"]["enable"],
+				"toggleSW": json_dist["fri"]["gimmick"]["toggleSW"]["enable"],
+				"keySW": json_dist["fri"]["gimmick"]["keySW"]["enable"],
+				"lightsOut": json_dist["fri"]["gimmick"]["lightsOut"]["enable"],
+				"level": json_dist["fri"]["gimmick"]["level"]["enable"],
+			}
 		},
 		"sat": {
 			"enable": json_dist["sat"]["enable"],
 			"alarm": json_dist["sat"]["alarm"],
+			"limit" : json_dist["mon"]["limit"],
+			"gimmickEnable": {
+				"wires": json_dist["sat"]["gimmick"]["wires"]["enable"],
+				"toggleSW": json_dist["sat"]["gimmick"]["toggleSW"]["enable"],
+				"keySW": json_dist["sat"]["gimmick"]["keySW"]["enable"],
+				"lightsOut": json_dist["sat"]["gimmick"]["lightsOut"]["enable"],
+				"level": json_dist["sat"]["gimmick"]["level"]["enable"],
+			}
 		},
 		"sun": {
 			"enable": json_dist["sun"]["enable"],
 			"alarm": json_dist["sun"]["alarm"],
+			"limit" : json_dist["mon"]["limit"],
+			"gimmickEnable": {
+				"wires": json_dist["sun"]["gimmick"]["wires"]["enable"],
+				"toggleSW": json_dist["sun"]["gimmick"]["toggleSW"]["enable"],
+				"keySW": json_dist["sun"]["gimmick"]["keySW"]["enable"],
+				"lightsOut": json_dist["sun"]["gimmick"]["lightsOut"]["enable"],
+				"level": json_dist["sun"]["gimmick"]["level"]["enable"],
+			}
 		}
 	}
 	return alarm_list
