@@ -36,6 +36,8 @@ class MCP23017:
         ----------
         IOADDR : bin, hex
           入出力設定アドレス
+          入力：1
+          出力：0
         """
 
         # 入出力設定アドレスを書き込み
@@ -112,6 +114,8 @@ class MCP23017:
         ----------
         IOADDR : bin, hex
           入出力設定アドレス
+          入力：1
+          出力：0
         """
 
         # 入出力設定アドレスを書き込み
@@ -176,3 +180,41 @@ class MCP23017:
             out_addr = decimal_number & mask
             # アドレス書き込み
             self.bus.write_byte_data(self.I2CADDR, self.REG_GPIOB, out_addr)
+
+    #------------------
+    # LEDアレイ制御用
+    #------------------
+    def light_up_LED_Array(self, level:int) -> None:
+        light_a = level
+        light_b = 0
+
+        if level > 8: 
+            light_a = 8
+            light_b = level - 8
+
+        light_up_bit_A = 0b0
+        light_up_bit_B = 0b0
+
+        # 出力の状態を取得
+        current_out = self.bus.read_byte_data(self.I2CADDR, self.REG_GPIOB)
+
+        if light_a > 0 :
+          light_up_bit_A = light_up_bit_A | 0b1
+          for i in range(light_a - 1) :
+            light_up_bit_A = light_up_bit_A << 1
+            light_up_bit_A = light_up_bit_A | 0b1
+
+          if light_b > 0 :
+            light_up_bit_B = light_up_bit_B | 0b1
+            for i in range(light_b - 1) :
+              light_up_bit_B = light_up_bit_B << 1
+              light_up_bit_B = light_up_bit_B | 0b1
+      
+        # print("GPIO A")
+        # print(bin(light_up_bit_A))
+        self.bus.write_byte_data(self.I2CADDR, self.REG_GPIOA, light_up_bit_A)
+
+        # print("GPIO B")
+        light_up_bit_B = (current_out & 0b1100) | light_up_bit_B
+        # print(bin(light_up_bit_B))
+        self.bus.write_byte_data(self.I2CADDR, self.REG_GPIOB, light_up_bit_B)
