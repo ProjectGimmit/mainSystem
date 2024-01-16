@@ -1,1 +1,399 @@
-{"mon": {"alarm": "1703", "enable": true, "gimmick": {"keySW": {"default": [false, false, false], "enable": false, "pattern": [true, true]}, "level": {"answer": 2, "enable": true}, "lightsOut": {"default": [true, false, false, true, false, false, false, true, true], "enable": true}, "toggleSW": {"answer": [false, true, false, false, true], "enable": true}, "wires": {"answer": [false, true, false, false], "enable": false}}}, "tue": {"enable": true, "alarm": "0900", "gimmick": {"wires": {"enable": false, "answer": [true, true, true, true]}, "toggleSW": {"enable": false, "answer": [true, true, true, true, true]}, "keySW": {"enable": false, "pattern": [true, false], "default": [true, true, true]}, "lightsOut": {"enable": true, "default": [false, true, false, true, false, true, false, true, false]}, "level": {"enable": true, "answer": 10}}}, "wed": {"enable": false, "alarm": "0900", "gimmick": {"wires": {"enable": false, "answer": [true, true, true, true]}, "toggleSW": {"enable": false, "answer": [true, true, true, true, true]}, "keySW": {"enable": false, "pattern": [true, false], "default": [true, true, true]}, "lightsOut": {"enable": true, "default": [false, true, false, true, false, true, false, true, false]}, "level": {"enable": true, "answer": 10}}}, "thu": {"enable": true, "alarm": "0900", "gimmick": {"wires": {"enable": false, "answer": [true, true, true, true]}, "toggleSW": {"enable": false, "answer": [true, true, true, true, true]}, "keySW": {"enable": false, "pattern": [true, false], "default": [true, true, true]}, "lightsOut": {"enable": true, "default": [false, true, false, true, false, true, false, true, false]}, "level": {"enable": true, "answer": 10}}}, "fri": {"enable": true, "alarm": "0900", "gimmick": {"wires": {"enable": false, "answer": [true, true, true, true]}, "toggleSW": {"enable": false, "answer": [true, true, true, true, true]}, "keySW": {"enable": false, "pattern": [true, false], "default": [true, true, true]}, "lightsOut": {"enable": true, "default": [false, true, false, true, false, true, false, true, false]}, "level": {"enable": true, "answer": 10}}}, "sat": {"enable": true, "alarm": "0900", "gimmick": {"wires": {"enable": false, "answer": [true, true, true, true]}, "toggleSW": {"enable": false, "answer": [true, true, true, true, true]}, "keySW": {"enable": false, "pattern": [true, false], "default": [true, true, true]}, "lightsOut": {"enable": true, "default": [false, true, false, true, false, true, false, true, false]}, "level": {"enable": true, "answer": 10}}}, "sun": {"enable": true, "alarm": "0900", "gimmick": {"wires": {"enable": false, "answer": [true, true, true, true]}, "toggleSW": {"enable": false, "answer": [true, true, true, true, true]}, "keySW": {"enable": false, "pattern": [true, false], "default": [true, true, true]}, "lightsOut": {"enable": true, "default": [false, true, false, true, false, true, false, true, false]}, "level": {"enable": true, "answer": 10}}}, "update": false, "trial": {"enable": false, "weekday": "mon"}}
+{
+  "mon": {
+    "enable": true,
+    "alarm": "1703",
+    "limit": 60,
+    "gimmick": {
+      "keySW": {
+        "default": [
+          true,
+          true,
+          false
+        ],
+        "enable": true,
+        "pattern": [
+          false,
+          true
+        ]
+      },
+      "level": {
+        "answer": 6,
+        "enable": true
+      },
+      "lightsOut": {
+        "default": [
+          false,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "enable": true
+      },
+      "toggleSW": {
+        "answer": [
+          true,
+          true,
+          false,
+          false,
+          true
+        ],
+        "enable": true
+      },
+      "wires": {
+        "answer": [
+          false,
+          true,
+          false,
+          true
+        ],
+        "enable": true
+      }
+    }
+  },
+  "tue": {
+    "enable": false,
+    "alarm": "0900",
+    "limit": 60,
+    "gimmick": {
+      "keySW": {
+        "default": [
+          true,
+          true,
+          false
+        ],
+        "enable": true,
+        "pattern": [
+          true,
+          false
+        ]
+      },
+      "level": {
+        "answer": 5,
+        "enable": true
+      },
+      "lightsOut": {
+        "default": [
+          false,
+          true,
+          false,
+          true,
+          true,
+          true,
+          false,
+          true,
+          false
+        ],
+        "enable": true
+      },
+      "toggleSW": {
+        "answer": [
+          true,
+          true,
+          false,
+          false,
+          true
+        ],
+        "enable": false
+      },
+      "wires": {
+        "answer": [
+          false,
+          false,
+          true,
+          true
+        ],
+        "enable": false
+      }
+    }
+  },
+  "wed": {
+    "enable": false,
+    "alarm": "0900",
+    "limit": 60,
+    "gimmick": {
+      "wires": {
+        "enable": false,
+        "answer": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "toggleSW": {
+        "enable": false,
+        "answer": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "keySW": {
+        "enable": false,
+        "pattern": [
+          true,
+          false
+        ],
+        "default": [
+          true,
+          true,
+          true
+        ]
+      },
+      "lightsOut": {
+        "enable": true,
+        "default": [
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "level": {
+        "enable": true,
+        "answer": 10
+      }
+    }
+  },
+  "thu": {
+    "enable": false,
+    "alarm": "0900",
+    "limit": 60,
+    "gimmick": {
+      "wires": {
+        "enable": false,
+        "answer": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "toggleSW": {
+        "enable": false,
+        "answer": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "keySW": {
+        "enable": false,
+        "pattern": [
+          true,
+          false
+        ],
+        "default": [
+          true,
+          true,
+          true
+        ]
+      },
+      "lightsOut": {
+        "enable": true,
+        "default": [
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "level": {
+        "enable": true,
+        "answer": 10
+      }
+    }
+  },
+  "fri": {
+    "enable": false,
+    "alarm": "1352",
+    "limit": 60,
+    "gimmick": {
+      "keySW": {
+        "default": [
+          false,
+          false,
+          false
+        ],
+        "enable": true,
+        "pattern": [
+          false,
+          true
+        ]
+      },
+      "level": {
+        "answer": 6,
+        "enable": false
+      },
+      "lightsOut": {
+        "default": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
+        "enable": true
+      },
+      "toggleSW": {
+        "answer": [
+          true,
+          false,
+          false,
+          false,
+          false
+        ],
+        "enable": true
+      },
+      "wires": {
+        "answer": [
+          false,
+          false,
+          false,
+          true
+        ],
+        "enable": true
+      }
+    }
+  },
+  "sat": {
+    "enable": true,
+    "alarm": "0917",
+    "limit": 60,
+    "gimmick": {
+      "keySW": {
+        "default": [
+          true,
+          true,
+          false
+        ],
+        "enable": true,
+        "pattern": [
+          false,
+          false
+        ]
+      },
+      "level": {
+        "answer": 1,
+        "enable": false
+      },
+      "lightsOut": {
+        "default": [
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          true,
+          false
+        ],
+        "enable": true
+      },
+      "toggleSW": {
+        "answer": [
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
+        "enable": false
+      },
+      "wires": {
+        "answer": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "enable": true
+      }
+    }
+  },
+  "sun": {
+    "enable": false,
+    "alarm": "0900",
+    "limit": 60,
+    "gimmick": {
+      "wires": {
+        "enable": false,
+        "answer": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "toggleSW": {
+        "enable": false,
+        "answer": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "keySW": {
+        "enable": false,
+        "pattern": [
+          true,
+          false
+        ],
+        "default": [
+          true,
+          true,
+          true
+        ]
+      },
+      "lightsOut": {
+        "enable": true,
+        "default": [
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "level": {
+        "enable": true,
+        "answer": 10
+      }
+    }
+  },
+  "update": false,
+  "trial": {
+    "enable": false,
+    "weekday": "mon"
+  }
+}

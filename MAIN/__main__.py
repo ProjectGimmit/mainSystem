@@ -9,7 +9,7 @@ from level import Level
 from lightsout import Lightsout
 from modules.edit_json import read_config, write_config
 
-LIMIT_TIME = 30 # ギミック解除タイムリミット(秒)
+LIMIT_TIME = 60 # ギミック解除タイムリミット(秒)
 
 # #-----------
 # # toggleSW
@@ -137,6 +137,10 @@ def alarm():
 # アラーム解除
 #---------------
 def alarm_process(weekday: str):
+    # タイムリミット取得
+    CONFIG = read_config()
+    LIMIT_CONFIG = CONFIG[weekday]["limit"]
+
     forced_stop = False # 強制停止フラグ
     while True:
         
@@ -170,7 +174,7 @@ def alarm_process(weekday: str):
             # カウントダウン
             #-----------------
             now_time = time.monotonic()
-            tmp_time = LIMIT_TIME - int(now_time - start_time)
+            tmp_time = LIMIT_CONFIG - int(now_time - start_time)
 
             if view_time != tmp_time:
               view_time = tmp_time
@@ -212,6 +216,7 @@ def alarm_process(weekday: str):
     keySW.stop()
     level.stop()
     lightsout.stop()
+    wires.stop()
     h, m = clock()
     tm.numbers(h, m, colon=True)
 
