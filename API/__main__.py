@@ -29,7 +29,7 @@ def get_alarms() :
 		"tue": {
 			"enable": json_dist["tue"]["enable"],
 			"alarm": json_dist["tue"]["alarm"],
-			"limit" : json_dist["mon"]["limit"],
+			"limit" : json_dist["tue"]["limit"],
 			"gimmickEnable": {
 				"wires": json_dist["tue"]["gimmick"]["wires"]["enable"],
 				"toggleSW": json_dist["tue"]["gimmick"]["toggleSW"]["enable"],
@@ -41,7 +41,7 @@ def get_alarms() :
 		"wed": {
 			"enable": json_dist["wed"]["enable"],
 			"alarm": json_dist["wed"]["alarm"],
-			"limit" : json_dist["mon"]["limit"],
+			"limit" : json_dist["wed"]["limit"],
 			"gimmickEnable": {
 				"wires": json_dist["wed"]["gimmick"]["wires"]["enable"],
 				"toggleSW": json_dist["wed"]["gimmick"]["toggleSW"]["enable"],
@@ -53,7 +53,7 @@ def get_alarms() :
 		"thu": {
 			"enable": json_dist["thu"]["enable"],
 			"alarm": json_dist["thu"]["alarm"],
-			"limit" : json_dist["mon"]["limit"],
+			"limit" : json_dist["thu"]["limit"],
 			"gimmickEnable": {
 				"wires": json_dist["thu"]["gimmick"]["wires"]["enable"],
 				"toggleSW": json_dist["thu"]["gimmick"]["toggleSW"]["enable"],
@@ -65,7 +65,7 @@ def get_alarms() :
 		"fri": {
 			"enable": json_dist["fri"]["enable"],
 			"alarm": json_dist["fri"]["alarm"],
-			"limit" : json_dist["mon"]["limit"],
+			"limit" : json_dist["fri"]["limit"],
 			"gimmickEnable": {
 				"wires": json_dist["fri"]["gimmick"]["wires"]["enable"],
 				"toggleSW": json_dist["fri"]["gimmick"]["toggleSW"]["enable"],
@@ -77,7 +77,7 @@ def get_alarms() :
 		"sat": {
 			"enable": json_dist["sat"]["enable"],
 			"alarm": json_dist["sat"]["alarm"],
-			"limit" : json_dist["mon"]["limit"],
+			"limit" : json_dist["sat"]["limit"],
 			"gimmickEnable": {
 				"wires": json_dist["sat"]["gimmick"]["wires"]["enable"],
 				"toggleSW": json_dist["sat"]["gimmick"]["toggleSW"]["enable"],
@@ -89,7 +89,7 @@ def get_alarms() :
 		"sun": {
 			"enable": json_dist["sun"]["enable"],
 			"alarm": json_dist["sun"]["alarm"],
-			"limit" : json_dist["mon"]["limit"],
+			"limit" : json_dist["sun"]["limit"],
 			"gimmickEnable": {
 				"wires": json_dist["sun"]["gimmick"]["wires"]["enable"],
 				"toggleSW": json_dist["sun"]["gimmick"]["toggleSW"]["enable"],
